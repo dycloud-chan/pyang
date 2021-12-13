@@ -1,8 +1,8 @@
-name: tests2
+name: tests3
 on:
   workflow_dispatch:
 jobs:
-  run-tests2:
+  run-tests3:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -26,14 +26,14 @@ jobs:
           pip install -r requirements.txt
           pip install -r dev-requirements.txt
 
-      - name: Run tests2
+      - name: Run tests3
         run: |
           source env.sh
           export USE_VIRTUALENV=true
           make pylint test TEST_MODE=coverage
           find . -name '.coverage*' -exec mv -t . {} +
           coverage combine
-          # Test .gitignore for tests2:
+          # Test .gitignore for tests3:
           TMP=$(tempfile)
           git ls-files . --exclude-standard --others | tee "$TMP"
           if test -s "$TMP"; then false; else true; fi
